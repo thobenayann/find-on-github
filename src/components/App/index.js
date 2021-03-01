@@ -16,6 +16,9 @@ import data from '../../data/repos';
 function App() {
   // tableau de nos repos dans le state
   const [repos, setRepos] = useState([]);
+  // Nombre de résultats de recherche
+  const [totalCount, setTotalCount] = useState(null);
+  // null est falsy
 
   // requête axios pour la récupération de la liste des repos
   const onSubmit = (searchTerm) => {
@@ -23,6 +26,7 @@ function App() {
     axios.get(`https://api.github.com/search/repositories?q=${searchTerm}`)
       .then((response) => {
         setRepos(response.data.items);
+        setTotalCount(response.data.total_count);
       })
       .catch((error) => {
         console.log('error', error);
@@ -34,7 +38,8 @@ function App() {
       <SearchBar 
         handleSubmit={onSubmit}
       />
-      <Message />
+      {/* affichage conditionnel, si on a pas de repos, on affiche pas le message */}
+      { totalCount && <Message nbRepos={totalCount} />}
       <ReposResults repoList={repos} />
     </div>
   );
