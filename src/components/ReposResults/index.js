@@ -1,36 +1,51 @@
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // == Import components
 import { Card, Icon } from 'semantic-ui-react';
 
-const ReposResults = () => (
+const ReposResults = ({ repoList }) => (
     <Card.Group>
-        <Card
-            image='https://picsum.photos/290/290'
-            header='react'
-            meta='Facebook'
-            description='React sert à faire des interfaces trop classes'
-            extra={(
-                <a>
-                    <Icon name='star' />
-                    5000 stars
-                </a>
-            )}
-        />
-        <Card
-            image='https://picsum.photos/290/290'
-            header='react'
-            meta='Facebook'
-            description='React sert à faire des interfaces trop classes'
-            extra={(
-                <a>
-                    <Icon name='star' />
-                    5000 stars
-                </a>
-            )}
-        />
+        {repoList.map((repo) => (
+            <Card
+                key={repo.id}
+                image={repo.owner.avatar_url}
+                header={repo.name}
+                meta={repo.owner.login}
+                description={repo.description}
+                extra={(
+                    <a>
+                        <Icon name='star' />
+                        {repo.stargazers_count}
+                    </a>
+                )}
+            />
+        ))}
     </Card.Group>
 );
+
+ReposResults.propTypes = {
+    repoList: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string,
+            owner: PropTypes.shape({
+                avatar_url: PropTypes.string.isRequired,
+                login: PropTypes.string.isRequired,
+            }),
+            stargazers_count: PropTypes.number.isRequired,
+        }),
+    ).isRequired,
+};
+
+ReposResults.defaultProps = {
+    repoList: PropTypes.arrayOf(
+        PropTypes.shape({
+            description: '',
+        }),
+    ).isRequired,
+}
 
 export default ReposResults;
