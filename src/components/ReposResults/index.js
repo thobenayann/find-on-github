@@ -5,11 +5,15 @@ import PropTypes from 'prop-types';
 // == Import components
 import { Card, Icon } from 'semantic-ui-react';
 
+// == Import style
+import './reposResults.scss';
+
 const ReposResults = ({ repoList }) => (
     <Card.Group centered itemsPerRow={5} doubling={true}>
     {/* doubling est une propriété donnée par SemanticUI pour le responsive */}
         {repoList.map((repo) => (
             <Card
+                className="card"
                 key={repo.id}
                 image={repo.owner.avatar_url}
                 header={repo.name}
