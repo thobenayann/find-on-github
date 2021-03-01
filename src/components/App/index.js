@@ -10,7 +10,7 @@ import ReposResults from '../ReposResults';
 import data from '../../data/repos';
 
 // == Import CSS
-import '../../styles/index.scss';
+import './app.scss';
 import 'semantic-ui-css/semantic.min.css';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           console.log('je suis dans app et search vaut :', search);
         }}
       />
-      <Message nbRepos={1000} />
+      <Message />
       <ReposResults repoList={data.items} />
     </div>
   );

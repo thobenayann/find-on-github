@@ -12,7 +12,11 @@ const Message = ({ nbRepos }) => (
 );
 
 Message.propTypes = {
-    nbRepos: PropTypes.number.isRequired,
+    nbRepos: PropTypes.number,
+};
+
+Message.defaultProps = {
+    nbRepos: 33,
 };
 
 export default Message;
