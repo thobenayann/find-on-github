@@ -16,7 +16,7 @@ Message.propTypes = {
 };
 
 Message.defaultProps = {
-    nbRepos: 33,
+    nbRepos: 0,
 };
 
 export default Message;

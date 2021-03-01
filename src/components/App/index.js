@@ -1,5 +1,6 @@
 // == Import npm
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 // == Import components
 import SearchBar from '../SearchBar';
@@ -10,19 +11,31 @@ import ReposResults from '../ReposResults';
 import data from '../../data/repos';
 
 // == Import CSS
-import './app.scss';
-import 'semantic-ui-css/semantic.min.css';
+// import './app.scss';
 
 function App() {
+  // tableau de nos repos dans le state
+  const [repos, setRepos] = useState([]);
+
+  // requête axios pour la récupération de la liste des repos
+  const onSubmit = (searchTerm) => {
+    // Query string avec notre variable searchTerm récupérée depuis l'input de SemanticUI
+    axios.get(`https://api.github.com/search/repositories?q=${searchTerm}`)
+      .then((response) => {
+        setRepos(response.data.items);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+
   return (
     <div className="app">
       <SearchBar 
-        handleSubmit={(search) => {
-          console.log('je suis dans app et search vaut :', search);
-        }}
+        handleSubmit={onSubmit}
       />
       <Message />
-      <ReposResults repoList={data.items} />
+      <ReposResults repoList={repos} />
     </div>
   );
 }
