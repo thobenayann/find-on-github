@@ -29,7 +29,10 @@ function App() {
 
 
   // requête axios pour la récupération de la liste des repos
-  const onSubmit = (searchTerm) => {
+  const onSubmit = (searchTerm) => { // si search est à vide ...
+    if (search === '') { // on sort de la fonction
+      return;
+    };
     // on vide nos repos, afin de voir le loader
     setRepos([]);
     // On active le Loader
