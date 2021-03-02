@@ -8,6 +8,7 @@ import Message from '../Message';
 import ReposResults from '../ReposResults';
 import Loader from '../Loader';
 import ErrorMessage from '../ErrorMessage';
+import Header from '../Header';
 
 // == Import CSS
 import './app.scss';
@@ -88,13 +89,17 @@ function App() {
 
   return (
     <div className="app">
+      <Header />
       <SearchBar
         setSearchValue={setSearch}
         searchValue={search}
         handleSubmit={onSubmit}
       />
-      {/* affichage conditionnel, si on a pas de repos, on affiche pas le message */}
-      { totalCount && <Message nbRepos={totalCount} />}
+      {/* affichage conditionnel: si on a pas de repos, on affiche pas le message */}
+      { totalCount > 0 && <Message nbRepos={totalCount} />}
+      {/* affichage conditionnel: si on a pas d'erreur mais qu'il n'y a pas de repo, on affiche pas le message */}
+      {(!hasError && totalCount === 0)  && <ErrorMessage text="Aucun repo ne correspond à votre recherche"/>}
+      {/* affichage conditionnel: s'il y a une erreur, on le signal à l'utilisateur */}
       {hasError && <ErrorMessage text="Erreur de récupération des repos"/>}
       <ReposResults
         isLoading={isLoading}

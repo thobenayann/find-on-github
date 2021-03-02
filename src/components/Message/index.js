@@ -5,10 +5,15 @@ import PropTypes from 'prop-types';
 // == Import components
 import { Message as SemanticMessage } from 'semantic-ui-react';
 
+// == Import du style
+import './message.scss';
+
 const Message = ({ nbRepos }) => (
-    <SemanticMessage >
-        {nbRepos} résultats de recherche
-    </SemanticMessage>
+    <div className='messageContainer'>
+        <SemanticMessage color='green'>
+            {nbRepos} résultats de recherche
+        </SemanticMessage>
+    </div>
 );
 
 Message.propTypes = {

@@ -8,10 +8,13 @@ import { Input, Form, Image } from 'semantic-ui-react';
 // == Import image
 import logoGithub from '../../assets/images/logo-github.png';
 
+// == Import Style
+import './searchBar.scss';
+
 const SearchBar = ({ handleSubmit, searchValue, setSearchValue }) => {
 
     return (
-        <>
+        <div className="searchBarContainer">
             <Image centered size="medium" src={ logoGithub }/>
             <Form
                 onSubmit={() => {
@@ -30,7 +33,7 @@ const SearchBar = ({ handleSubmit, searchValue, setSearchValue }) => {
                     }}
                 />
             </Form>
-        </>
+        </div>
     );
 };
 

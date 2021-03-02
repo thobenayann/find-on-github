@@ -5,8 +5,13 @@ import PropTypes from 'prop-types';
 // == Import components
 import { Message } from 'semantic-ui-react';
 
+// == Import style
+import './errorMessage.scss';
+
 const ErrorMessage = ({ text }) => (
-    <Message negative>{text}</Message>
+    <div className='errorMessageContainer' >
+        <Message negative>{text}</Message> 
+    </div>
 );
 
 ErrorMessage.propTypes = {
