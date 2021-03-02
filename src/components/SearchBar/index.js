@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // == Import components
@@ -8,8 +8,7 @@ import { Input, Form, Image } from 'semantic-ui-react';
 // == Import image
 import logoGithub from '../../assets/images/logo-github.png';
 
-const SearchBar = ({ handleSubmit }) => {
-    const [search, setSearch] = useState('');
+const SearchBar = ({ handleSubmit, searchValue, setSearchValue }) => {
 
     return (
         <>
@@ -18,17 +17,16 @@ const SearchBar = ({ handleSubmit }) => {
                 onSubmit={() => {
                     // le composant Form de Semantic UI fait un event.preventDefault
                     // Ici, je n'ai donc pas besoin du paramètre event ni de la fonction preventDefault
-                    handleSubmit(search);
+                    handleSubmit();
                 }}
             >
                 <Input
                     fluid
                     icon="search"
                     placeholder='Recherche de repos'
-                    value={search}
+                    value={searchValue}
                     onChange={(event) => {
-                        console.log(event.target.value);
-                        setSearch(event.target.value);
+                        setSearchValue(event.target.value);
                     }}
                 />
             </Form>
@@ -38,6 +36,8 @@ const SearchBar = ({ handleSubmit }) => {
 
 SearchBar.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    setSearchValue: PropTypes.func.isRequired,
+    searchValue: PropTypes.string.isRequired,
 };
 
 export default SearchBar;
