@@ -17,14 +17,16 @@ const ReposResults = ({ repoList, onNextPageClick, isLoading }) => (
                     className="card"
                     key={repo.id}
                     image={repo.owner.avatar_url}
+                    href={repo.html_url}
+                    target="_blank"
                     header={repo.name}
                     meta={repo.owner.login}
                     description={repo.description}
                     extra={(
-                        <a>
+                        <>
                             <Icon name='star' />
                             {repo.stargazers_count}
-                        </a>
+                        </>
                     )}
                 />
             ))}
@@ -52,6 +54,7 @@ ReposResults.propTypes = {
             id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             description: PropTypes.string,
+            html_url: PropTypes.string.isRequired,
             owner: PropTypes.shape({
                 avatar_url: PropTypes.string.isRequired,
                 login: PropTypes.string.isRequired,
