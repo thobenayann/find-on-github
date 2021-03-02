@@ -9,6 +9,7 @@ import ReposResults from '../ReposResults';
 import Loader from '../Loader';
 import ErrorMessage from '../ErrorMessage';
 import Header from '../Header';
+import Footer from '../Footer';
 
 // == Import CSS
 import './app.scss';
@@ -51,6 +52,7 @@ function App() {
       .catch((error) => {
         console.log('error', error);
         setHasError(true);
+        setTotalCount(null);
       })
       .finally(() => {
         // ce que contient finally sera exécuté à la fin de la requête
@@ -80,6 +82,7 @@ function App() {
       .catch((error) => {
         console.log('error', error);
         setHasError(true);
+        setTotalCount(null);
       })
       .finally(() => {
         setIsLoading(false);
@@ -108,6 +111,7 @@ function App() {
       />
       {/* le tout premier chargement : j'ai 0 données */}
       { isLoading && repos.length === 0 && <Loader />}
+      <Footer />
     </div>
   );
 }
